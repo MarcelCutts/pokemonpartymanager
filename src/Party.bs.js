@@ -2,11 +2,11 @@
 
 import * as React from "react";
 
-function Pokemon(Props) {
-  return React.createElement("h1", undefined, "Hello");
+function Party(Props) {
+  return React.createElement("div", undefined);
 }
 
-var make = Pokemon;
+var make = Party;
 
 export {
   make ,

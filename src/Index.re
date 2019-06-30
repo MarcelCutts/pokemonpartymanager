@@ -1,1 +1,1 @@
-ReactDOMRe.renderToElementWithId(<Pokemon />, "app");
+ReactDOMRe.renderToElementWithId(<App />, "app");

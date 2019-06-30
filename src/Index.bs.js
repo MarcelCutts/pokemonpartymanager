@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import * as ReactDOMRe from "reason-react/src/ReactDOMRe.js";
-import * as Pokemon$Pokemon from "./Pokemon.bs.js";
+import * as App$Pokemon from "./App.bs.js";
 
-ReactDOMRe.renderToElementWithId(React.createElement(Pokemon$Pokemon.make, { }), "app");
+ReactDOMRe.renderToElementWithId(React.createElement(App$Pokemon.make, { }), "app");
 
 export {
   
