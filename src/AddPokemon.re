@@ -1,9 +1,10 @@
 [@react.component]
-let make = () => {
+let make = (~addHandler) => {
   let (name, setName) = React.useState(() => "");
 
   let handleSubmit = e => {
     ReactEvent.Form.preventDefault(e);
+    addHandler(name);
     setName(_ => "");
   };
 

@@ -4,6 +4,7 @@ import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
 
 function AddPokemon(Props) {
+  var addHandler = Props.addHandler;
   var match = React.useState((function () {
           return "";
         }));
@@ -11,6 +12,7 @@ function AddPokemon(Props) {
   var name = match[0];
   var handleSubmit = function (e) {
     e.preventDefault();
+    Curry._1(addHandler, name);
     return Curry._1(setName, (function (param) {
                   return "";
                 }));
