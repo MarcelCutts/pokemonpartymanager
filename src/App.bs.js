@@ -8,6 +8,15 @@ import * as V4 from "uuid/v4";
 import * as Party$Pokemon from "./Party.bs.js";
 import * as AddPokemon$Pokemon from "./AddPokemon.bs.js";
 
+function partyFullness(party) {
+  var match = List.length(party) < 7;
+  if (match) {
+    return /* NotFull */1;
+  } else {
+    return /* Full */0;
+  }
+}
+
 function App(Props) {
   var match = React.useReducer((function (state, action) {
           if (action.tag) {
@@ -15,16 +24,19 @@ function App(Props) {
             return /* record */[/* party */List.filter((function (p) {
                               return p[/* id */1] !== id;
                             }))(state[/* party */0])];
-          } else if (List.length(state[/* party */0]) < 7) {
-            return /* record */[/* party : :: */[
-                      /* record */[
-                        /* name */action[0],
-                        /* id */V4()
-                      ],
-                      state[/* party */0]
-                    ]];
           } else {
-            return state;
+            var match = partyFullness(state[/* party */0]);
+            if (match) {
+              return /* record */[/* party : :: */[
+                        /* record */[
+                          /* name */action[0],
+                          /* id */V4()
+                        ],
+                        state[/* party */0]
+                      ]];
+            } else {
+              return state;
+            }
           }
         }), /* record */[/* party : [] */0]);
   var dispatch = match[1];
@@ -43,6 +55,7 @@ function App(Props) {
 var make = App;
 
 export {
+  partyFullness ,
   make ,
   
 }
