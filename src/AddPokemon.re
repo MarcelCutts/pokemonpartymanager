@@ -15,6 +15,5 @@ let make = (~addHandler) => {
       onChange={e => ReactEvent.Form.target(e)##value |> setName}
     />
     <input type_="submit" value="Add" />
-    <h1> {ReasonReact.string(name)} </h1>
   </form>;
 };

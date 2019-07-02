@@ -1,7 +1,8 @@
-type state = {pokemon: list(string)};
-
 type action =
-  | Add(string);
+  | Add(string)
+  | Remove(string);
+
+type state = {party: T.party};
 
 [@react.component]
 let make = () => {
@@ -9,13 +10,18 @@ let make = () => {
     React.useReducer(
       (state, action) =>
         switch (action) {
-        | Add(p) => {pokemon: [p, ...state.pokemon]}
+        | Add(p) => {party: [{name: p, id: Uuid.v4()}, ...state.party]}
+        | Remove(id) => {
+            party: state.party |> List.filter((p: T.pokemon) => p.id != id),
+          }
         },
-      {pokemon: []},
+      {
+        {party: []};
+      },
     );
 
   <div>
     <AddPokemon addHandler={p => dispatch(Add(p))} />
-    <Party pokemon={state.pokemon} />
+    <Party removeHandler={id => dispatch(Remove(id))} party={state.party} />
   </div>;
 };
