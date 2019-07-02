@@ -10,7 +10,10 @@ let make = () => {
     React.useReducer(
       (state, action) =>
         switch (action) {
-        | Add(p) => {party: [{name: p, id: Uuid.v4()}, ...state.party]}
+        | Add(p) when state.party |> List.length < 7 => {
+            party: [{name: p, id: Uuid.v4()}, ...state.party],
+          }
+        | Add(p) => state
         | Remove(id) => {
             party: state.party |> List.filter((p: T.pokemon) => p.id != id),
           }
