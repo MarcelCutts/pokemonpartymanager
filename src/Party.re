@@ -1,10 +1,12 @@
+open T;
+
 [@react.component]
 let make = (~party, ~removeHandler) =>
   <div>
     {party
-     |> List.map((p: T.pokemon) =>
-          <h1 key={p.id} onClick={_ => removeHandler(p.id)}>
-            {ReasonReact.string(p.name)}
+     |> List.map(partyEntry =>
+          <h1 key={partyEntry.id} onClick={_ => removeHandler(partyEntry.id)}>
+            {ReasonReact.string(partyEntry.pokemon.name)}
           </h1>
         )
      |> Array.of_list

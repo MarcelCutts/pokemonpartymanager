@@ -1,37 +1,46 @@
+open T;
+
+module Styles = {
+  open Css;
+  let app =
+    style([display(`flex), flexDirection(`column), alignItems(`center)]);
+};
+
+let beltCapacity = party => party |> List.length < 7 ? NotFull : Full;
+
 type action =
-  | Add(string)
+  | Add(pokemon)
   | Remove(string);
-
-type full =
-  | Full
-  | NotFull;
-
-type state = {party: T.party};
-
-let partyFullness = party => party |> List.length < 7 ? NotFull : Full;
+type state = {party: list(T.partyEntry)};
+let stateReducer = (state, action) =>
+  switch (action) {
+  | Add(p) =>
+    switch (beltCapacity(state.party)) {
+    | Full => state
+    | NotFull => {
+        party: [
+          {
+            pokemon: {
+              name: p.name,
+              number: p.number,
+            },
+            id: Uuid.v4(),
+          },
+          ...state.party,
+        ],
+      }
+    }
+  | Remove(id) => {
+      party: state.party |> List.filter((p: partyEntry) => p.id != id),
+    }
+  };
 
 [@react.component]
 let make = () => {
-  let (state, dispatch) =
-    React.useReducer(
-      (state, action) =>
-        switch (action) {
-        | Add(p) =>
-          switch (partyFullness(state.party)) {
-          | Full => state
-          | NotFull => {party: [{name: p, id: Uuid.v4()}, ...state.party]}
-          }
-        | Remove(id) => {
-            party: state.party |> List.filter((p: T.pokemon) => p.id != id),
-          }
-        },
-      {
-        {party: []};
-      },
-    );
+  let (state, dispatch) = React.useReducer(stateReducer, {party: []});
 
-  <div>
-    <AddPokemon addHandler={p => dispatch(Add(p))} />
+  <div className=Styles.app>
+    <AddPokemon addHandler={pokemon => dispatch(Add(pokemon))} />
     <Party removeHandler={id => dispatch(Remove(id))} party={state.party} />
   </div>;
 };

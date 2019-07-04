@@ -1,6 +1,13 @@
 type pokemon = {
   name: string,
+  number: int,
+};
+
+type partyEntry = {
+  pokemon,
   id: string,
 };
 
-type party = list(pokemon);
+type capacity =
+  | Full
+  | NotFull;
