@@ -1,17 +1,8 @@
-# pokemon
+# Pokemon party manager! 🎉
 
-## Run Project
+This is a mostly complete attempt at creating a ReasonReact application in which you can manage your party of up to six pokemon.
 
-```sh
-npm install
-npm start
-# in another tab
-npm run webpack
-```
-
-After you see the webpack compilation succeed (the `npm run webpack` step), open up `build/index.html` (**no server needed!**). Then modify whichever `.re` file in `src` and refresh the page to see the changes.
-
-**For more elaborate ReasonReact examples**, please see https://github.com/reasonml-community/reason-react-example
+Slides covering the spec and workshop steps are available [here](https://docs.google.com/presentation/d/1wuAveSHslRfKShD6SiVdkz9OOyEfsto0nAQqmcjaun0/edit?usp=sharing)!
 
 ## Run Project with Server
 
